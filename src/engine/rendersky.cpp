@@ -509,7 +509,7 @@ void drawskybox(int farplane, bool limited)
 
     if(clampsky) glDepthRange(1, 1);
 
-	if(starbox[0] && skyboxalpha < 1.0f && cloudboxalpha < 1.0f)
+	if(starbox[0])
 	{	
 		// Draw starbox
 	    glColor3f((starboxtint>>16)/255.0f, ((starboxtint>>8)&255)/255.0f, (starboxtint&255)/255.0f);
@@ -542,7 +542,7 @@ void drawskybox(int farplane, bool limited)
 
    	    glDisable(GL_BLEND);
 	}
-	else if(cloudboxalpha < 1.0f && skyboxalpha > 0.0f)
+	else
 	{
 		glColor3f((skyboxtint>>16)/255.0f, ((skyboxtint>>8)&255)/255.0f, (skyboxtint&255)/255.0f);
 
@@ -557,7 +557,7 @@ void drawskybox(int farplane, bool limited)
 	    glPopMatrix();
 	}
 
-    if(!glaring && sunbox[0] && cloudboxalpha < 1.0f && sunboxalpha > 0.0f)
+    if(!glaring && sunbox[0])
     { // The sunbox won't be drawn unless you specify one, it spins x, not y, place at center of up for yaw=0 = 12pm (noon) in sun texture.
         glEnable(GL_BLEND);
         glBlendFunc(GL_SRC_ALPHA, GL_ONE_MINUS_SRC_ALPHA);
@@ -577,7 +577,7 @@ void drawskybox(int farplane, bool limited)
         glDisable(GL_BLEND);
     }
 
-    if(!glaring && cloudbox[0] && cloudboxalpha > 0.0f)
+    if(!glaring && cloudbox[0])
     {
         if(fading) glColorMask(GL_TRUE, GL_TRUE, GL_TRUE, GL_FALSE);
 
@@ -599,7 +599,7 @@ void drawskybox(int farplane, bool limited)
         glDisable(GL_BLEND);
     }
 
-    if(!glaring && cloudlayer[0] && cloudalpha > 0.0f && cloudheight && renderedskyfaces&(cloudheight < 0 ? 0x1F : 0x2F))
+    if(!glaring && cloudlayer[0] && cloudheight && renderedskyfaces&(cloudheight < 0 ? 0x1F : 0x2F))
     {
         if(fading) glColorMask(GL_TRUE, GL_TRUE, GL_TRUE, GL_FALSE);
 
@@ -622,7 +622,7 @@ void drawskybox(int farplane, bool limited)
         glEnable(GL_CULL_FACE);
     }
 
-    if(!glaring && altcloudlayer[0] && altcloudalpha > 0.0f && altcloudheight && renderedskyfaces&(altcloudheight < 0 ? 0x1F : 0x2F))
+    if(!glaring && altcloudlayer[0] && altcloudheight && renderedskyfaces&(altcloudheight < 0 ? 0x1F : 0x2F))
     {
         if(fading) glColorMask(GL_TRUE, GL_TRUE, GL_TRUE, GL_FALSE);
 
