@@ -172,7 +172,7 @@ void draw_alt_env_overlay(int w, Texture *overlay = NULL, float tx = 0, float ty
     float r = (altcloudtint>>16)/255.0f, g = ((altcloudtint>>8)&255)/255.0f, b = (altcloudtint&255)/255.0f;
     glColor4f(r, g, b, altcloudalpha);
     glBegin(GL_TRIANGLE_FAN);
-    loopi(altcloudsubdiv)
+    loopi(altcloudsubdiv+1)
     {
         vec p(1, 1, 0);
         p.rotate_around_z((-2.0f*M_PI*i)/altcloudsubdiv);
@@ -643,7 +643,7 @@ void drawskybox(int farplane, bool limited)
 
         glDisable(GL_BLEND);
 		glEnable(GL_CULL_FACE);
-	}
+	} 
 
 	if(!glaring && fogdomemax)
 	{
