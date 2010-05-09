@@ -412,10 +412,10 @@ if (Global.SERVER) {
 
             if (CAPI.getMapversion() <= 30 && stateData.attr1) {
                 switch (_class) {
-					case "Light":
-					case "FlickeringLight":
-					case "ParticleEffect":
-					    break;
+                    case "Light":
+                    case "FlickeringLight":
+                    case "ParticleEffect":
+                        break;
                     default:
                         stateData.attr1 = (parseInt(stateData.attr1)+180)%360;
                         break;
