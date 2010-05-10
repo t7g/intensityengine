@@ -827,7 +827,7 @@ bool load_world(const char *mname, const char *cname)        // still supports a
               printf("\"tags\":\"[start_@REPLACE_TEAM@]\", ");
             else
               printf("\"tags\":\"[]\", ");
-            printf("\"_persistent\":\"true\", ");
+            printf("\"_persistent\":\"true\"");
         printf("}], \r\n");
         uniqueId++;
         // INTENSITY: end Print ent out
