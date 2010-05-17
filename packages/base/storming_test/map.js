@@ -18,12 +18,8 @@ Library.include('library/' + Global.LIBRARY_VERSION + '/guns/Shotgun');
 Library.include('library/' + Global.LIBRARY_VERSION + '/guns/Chaingun');
 Library.include('library/' + Global.LIBRARY_VERSION + '/mapelements/Teleporters');
 Library.include('library/' + Global.LIBRARY_VERSION + '/mapelements/Cannons');
-Library.include('library/' + Global.LIBRARY_VERSION + '/mapelements/JumpPads');
-Library.include('library/' + Global.LIBRARY_VERSION + '/mapelements/Platforms');
 Library.include('library/' + Global.LIBRARY_VERSION + '/Editing');
 Library.include('library/' + Global.LIBRARY_VERSION + '/CustomEffect');
-Library.include('library/' + Global.LIBRARY_VERSION + '/mapelements/FlickeringLights');
-Library.include('library/' + Global.LIBRARY_VERSION + '/mapelements/specific/WebBrowser');
 
 //// Setup physics
 
@@ -155,7 +151,6 @@ registerEntityClass(
             Firing.plugins.player,
             Health.plugin,
             GameManager.playerPlugin,
-            Character.plugins.flashlight,
             Projectiles.plugin,
             StunballVictimPlugin,
             Chaingun.plugin,
@@ -193,40 +188,8 @@ function makeCannon(_name, gunClass, additionalPlugins) {
     return registerEntityClass( bakePlugins(Mapmodel, plugins.concat(additionalPlugins)) );
 }
 
-SwarmRocketCannonPlugin = {
-    init: function() {
-        this.autoTargetSearchRadius = 465;
-    },
-
-    activate: function() {
-        this.autoTargetParams = {
-            rotateSpeed: 60,
-            minPitch: -45,
-            maxPitch: 45,
-            eyeHeight: 7, // Where we shoot from
-/*
-            effectiveSearchRadius: function(actor, target, distance) {
-                var direction = target.position.subNew(actor.position).toYawPitch();
-                var yawDiff = Math.abs( normalizeAngle(direction.yaw, actor.autoTargetYaw) - actor.autoTargetYaw );
-                var pitchDiff = Math.abs( normalizeAngle(direction.pitch, actor.autoTargetPitch) - actor.autoTargetPitch );
-                if (yawDiff + pitchDiff > 45) return 500;
-                return distance;
-            },
-*/
-            seekDelay: 3.0, // How often to search for an entity to target
-            fullSyncRate: 1.0/5,
-            interpolateRate: 1/30,
-        };
-        this.botFiringParams = {
-            firingDelay: 3,
-            triggerFingerDelay: 0.33,
-        };
-    },
-};
-
 makeCannon('Autoturrent', StunballGun, [Projectiles.plugin, StunballBotPlugin]);
-makeCannon('RocketCannon', RocketGun.extend({ projectileClass: Rocket.extend({ explosionPower: 25, speed: 150, accuracy: 0.5, timeLeft: 8.0, gravityFactor: 0 }) }), [Projectiles.plugin, SwarmRocketCannonPlugin]);
-makeCannon('UpsidedownRocketCannon', RocketGun.extend({ projectileClass: Rocket.extend({ explosionPower: 25, speed: 150, accuracy: 0.5, timeLeft: 8.0, gravityFactor: 0 }) }), [Projectiles.plugin, UpsidedownCannonPlugin, SwarmRocketCannonPlugin]);
+
 
 
 //// Tower area trigger, for effects
@@ -482,15 +445,6 @@ ApplicationManager.setApplicationClass(Application.extend({
 
     clientClick: Firing.clientClick,
 }));
-
-ApplicationManager.instance.connect('actionKey',
-    function(index, down) {
-		if (!down) return;
-		if (index == 0) {
-			UserInterface.showMessage("Middle mouse: Cycle weapons");
-		}
-	}
-);
 
 //// Load permanent entities
 
