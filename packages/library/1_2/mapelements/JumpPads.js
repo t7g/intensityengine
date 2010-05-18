@@ -2,7 +2,7 @@
 // Copyright 2010 Alon Zakai ('kripken'). All rights reserved.
 // This file is part of Syntensity/the Intensity Engine, an open source project. See COPYING.txt for licensing.
 
-Library.include('library/' + Global.LIBRARY_VERSION + '/Plugins');
+Library.include('library/1_2/Plugins');
 
 
 JumpPadPlugin = {
@@ -48,7 +48,7 @@ JumpPadPlugin = {
             var yaw = -(Global.time*120) % 360;
             //log(ERROR, "yaw:" + yaw + ',' + Global.time + ":" + Global.time % 360);
         }
-        var args = [this, (this.padModel) ? this.padModel : "jumppad", ANIM_IDLE|ANIM_LOOP, o.x, o.y, o.z, this.padRotate ? yaw : this.yaw, this.padPitch ? this.padPitch : 90, flags, 0];
+        var args = [this, this.padModel ? this.padModel : "jumppad", ANIM_IDLE|ANIM_LOOP, o.x, o.y, o.z, this.padRotate ? yaw : this.yaw, this.padPitch ? this.padPitch : 90, flags, 0];
         CAPI.renderModel.apply(this, args);
     },
 };
