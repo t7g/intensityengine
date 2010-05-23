@@ -36,7 +36,7 @@ beam.png
 blood.png
 bubble.jpg
 decal.png
-explosion.png
+explode.png
 flame1.png
 flame2.png
 flame3.png
