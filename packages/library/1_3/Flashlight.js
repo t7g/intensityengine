@@ -27,7 +27,7 @@
 //!                  },
 //!              },
 //!
-//! Plugins supports two lights, for cars for example. To disable looking up/down with lights,
+//! Plugin supports two lights, for cars for example. To disable looking up/down with lights,
 //! don't forget to force pitch for your car camera.
 //! The distance between them has its own variable.
 //!
